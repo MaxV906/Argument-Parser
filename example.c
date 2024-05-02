@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
     printf("\nParser Demo Usage:\n\n");
 
     parser_print_help(&p);
-	parser_free(&p);
+    parser_free(&p);
 
   }
 
