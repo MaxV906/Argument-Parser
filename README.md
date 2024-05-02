@@ -30,7 +30,7 @@ typedef enum argument_type { ARG_STRING, ARG_BOOL } ARG_TYPE;
 Once you're done adding your arguments, you can start parsing them. To parse the arguments, you can use the following function:
 
 ```C
-parser_parse_args(&p);
+parser_parse_args(&p, argc, argv);
 ```
 
 This function only requires a pointer to the parser structure.
