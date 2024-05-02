@@ -29,9 +29,11 @@ void parser_add_arg(PARSER *p, char *flag, char *description, ARG_TYPE type) {
 
   p->length++;
 
-  if (p->length % 2 == 0) {
+  for (uint i = 1; i <= p->length; i *= 2) {
+    if (i == p->length) {
 
-    p->args = realloc(p->args, p->length * sizeof(ARG) * 2);
+      p->args = realloc(p->args, p->length * sizeof(ARG) * 2);
+    }
   }
 
   if (p->args == NULL) {
