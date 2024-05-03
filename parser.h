@@ -50,11 +50,15 @@ void parser_parse_args(PARSER *p, int argc, char **argv) {
   for (uint i = 0; i < argc; i++) {
 
     for (uint j = 0; j < p->length; j++) {
+
       if (!strcmp(argv[i], p->args[j].flag)) {
+
         p->args[j].is_present = 1;
-        if (p->args[j].type == ARG_STRING) {
+      }
+
+      if (p->args[j].type == ARG_STRING) {
+
           p->args[j].value = argv[i + 1];
-        }
       }
     }
   }
