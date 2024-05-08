@@ -69,6 +69,5 @@ PARSER.length **is not** supposed to be changed, it's meant to be automatically 
 
 You can install the parser library by running the following commands:
 ```bash
-make
 sudo make install
 ```
