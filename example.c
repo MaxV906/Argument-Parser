@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     parser_add_arg(&p, "-g", "test bool arg", ARG_BOOL);
     parser_parse_args(&p, argc, argv);
 
-    for (uint i = 0; i < p.length; i++) {
+    for (int i = 0; i < p.length; i++) {
 
       printf("%s: %s - %s (%d)\n", p.args[i].flag, p.args[i].value,
              p.args[i].description, p.args[i].is_present);

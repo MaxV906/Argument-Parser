@@ -1,9 +1,8 @@
-SOURCE_FILES = $(wildcard *.c)
 
 all: compile
 
-compile: $(SOURCE_FILES)
-	gcc -o parser $(SOURCE_FILES)
+compile: example.c
+	gcc -o parser example.c
 
 install:
 	cp parser.h /usr/include/parser.h

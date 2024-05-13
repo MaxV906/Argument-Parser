@@ -8,7 +8,7 @@ typedef struct argument {
   char *description;
   char *value;
   ARG_TYPE type;
-  uint is_present;
+  int is_present;
 } ARG;
 
 typedef struct parser {
@@ -29,11 +29,8 @@ void parser_add_arg(PARSER *p, char *flag, char *description, ARG_TYPE type) {
 
   p->length++;
 
-  for (uint i = 1; i <= p->length; i *= 2) {
-    if (i == p->length) {
-
-      p->args = realloc(p->args, p->length * sizeof(ARG) * 2);
-    }
+  if (p->length != 1) {
+    p->args = realloc(p->args, p->length * sizeof(ARG));
   }
 
   if (p->args == NULL) {
@@ -47,9 +44,9 @@ void parser_add_arg(PARSER *p, char *flag, char *description, ARG_TYPE type) {
 
 void parser_parse_args(PARSER *p, int argc, char **argv) {
 
-  for (uint i = 0; i < argc; i++) {
+  for (int i = 0; i < argc; i++) {
 
-    for (uint j = 0; j < p->length; j++) {
+    for (int j = 0; j < p->length; j++) {
 
       if (!strcmp(argv[i], p->args[j].flag)) {
 
@@ -65,7 +62,7 @@ void parser_parse_args(PARSER *p, int argc, char **argv) {
 }
 
 void parser_print_help(PARSER *p) {
-  for (uint i = 0; i < p->length; i++) {
+  for (int i = 0; i < p->length; i++) {
     printf("\t%s - %s\n", p->args[i].flag, p->args[i].description);
   }
 }
