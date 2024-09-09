@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef enum { ARG_STRING, ARG_BOOL } ARG_TYPE;
+
+typedef struct {
+  char *flag;
+  char *description;
+  char *value;
+  ARG_TYPE type;
+  int is_present;
+} ARG;
+
+typedef struct {
+  ARG *args;
+  int length; // DO NOT CHANGE!!!
+} PARSER;
+
+PARSER parser_init() {
+
+  PARSER p;
+  p.length = 0;
+  p.args = malloc(sizeof(ARG));
+
+  return p;
+}
+
+void parser_add_arg(PARSER *p, char *flag, char *description, ARG_TYPE type) {
+
+  p->length++;
+
+  if (p->length != 1) {
+    p->args = realloc(p->args, p->length * sizeof(ARG));
+  }
+
+  if (p->args == NULL) {
+
+    printf("Failed to allocate memory\n");
+    exit(1);
+  }
+
+  p->args[p->length - 1] = (ARG){flag, description, NULL, type, 0};
+}
+
+void parser_parse_args(PARSER *p, int argc, char **argv) {
+
+  for (int i = 0; i < argc; i++) {
+
+    for (int j = 0; j < p->length; j++) {
+
+      if (!strcmp(argv[i], p->args[j].flag)) {
+
+        p->args[j].is_present = 1;
+      }
+
+      if (p->args[j].type == ARG_STRING) {
+
+          p->args[j].value = argv[i + 1];
+      }
+    }
+  }
+}
+
+void parser_print_help(PARSER *p) {
+  for (int i = 0; i < p->length; i++) {
+    printf("\t%s - %s\n", p->args[i].flag, p->args[i].description);
+  }
+}
+
+void parser_free(PARSER *p) {
+  free(p->args);
+  p->args = NULL;
+}
