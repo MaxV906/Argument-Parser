@@ -4,6 +4,16 @@ A simple argument parser library written for C.
 
 # Usage
 
+To use the library after installation include the parser.h in your code
+```C
+#include <parser.h>
+```
+
+When compiling include -lparser in your compiler arguments
+```sh
+gcc example.c -o example -lparser
+```
+
 ### Initialize a parser
 As shown in [example code](https://github.com/MaxV906/Argument-Parser/blob/main/example.c), a parser can be initialized as following:
 ```C
@@ -25,7 +35,7 @@ typedef enum argument_type { ARG_STRING, ARG_BOOL } ARG_TYPE;
 
 **ARG_STRING** stores the argument vulue while **ARG_BOOL** doesn't.
 
-## Parsing arguments
+### Parsing arguments
 
 Once you're done adding your arguments, you can start parsing them. To parse the arguments, you can use the following function:
 
@@ -61,7 +71,7 @@ parser_free(&p);
 ```
 This will free the allocated space and set PARSER.args to NULL.
 
-## Important!!!
+### Important!!!
 Don't change the **length** of the parser, as this will cause bugs.
 PARSER.length **is not** supposed to be changed, it's meant to be automatically ised by parser functions.
 
